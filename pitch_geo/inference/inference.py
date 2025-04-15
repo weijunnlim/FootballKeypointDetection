@@ -9,7 +9,7 @@ from pitch_geo.models.models import load_saved_model
 
 def infer(
     model_name: Path = "./best_model",
-    input_dir: Path = "./data/images/test",
+    input_dir: Path = "/home/weijunl/Football-Object-Detection/datasets/dataset/test/images",
     output_csv: Path = "./outputs/output_keypoints.csv",
     batch: int = 32,
 ):
@@ -44,8 +44,12 @@ def infer(
 
     # Data Frame with keypoints annotations
     df = utils.keypoints_to_df(
-        keypoints, dataset_builder.images_paths, should_add_ghost_keypoints=True
-    )
+    keypoints["reshape_1"], dataset_builder.images_paths, should_add_ghost_keypoints=True
+)
+
+    # df = utils.keypoints_to_df(
+    #     keypoints, dataset_builder.images_paths, should_add_ghost_keypoints=True
+    # )
 
     df.to_csv(output_csv, index=False)
     print(f"Keypoints saved in {output_csv}")

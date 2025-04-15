@@ -41,6 +41,17 @@ def get_model(
 
 
 def load_saved_model(model_path: Union[str, Path]):
-    model = tf.keras.models.load_model(model_path)
-    print(f"Loaded the model {model_path}.")
+    from tensorflow.keras.models import Model
+    from tensorflow.keras.layers import TFSMLayer, Input
+
+    input_shape = (240, 240, 3)  # TODO: Replace with your actual model input shape
+
+    inputs = Input(shape=input_shape, dtype=tf.float32)
+    outputs = TFSMLayer(model_path, call_endpoint="serving_default")(inputs)
+    model = Model(inputs=inputs, outputs=outputs)
+
+    print(f"Wrapped TFSMLayer from {model_path} in a Keras Model.")
     return model
+    # model = tf.keras.models.load_model(model_path)
+    # print(f"Loaded the model {model_path}.")
+    # return model

@@ -87,11 +87,11 @@ class KeypointDataset:
         df = _keypoints_preprocessing_utils.drop_empty_images(df)
         df = _keypoints_preprocessing_utils.drop_ghost_keypoints(df)
         df = _keypoints_preprocessing_utils.normalize_coordinates(df)
+        print("After normalizing coordinates:", df.shape)
 
         df.sort_values(by=["image_path", "kid"], inplace=True)
 
         return df
-
 
 def get_data(dataset: Literal["train", "test"]) -> KeypointDataset:
     return KeypointDataset(

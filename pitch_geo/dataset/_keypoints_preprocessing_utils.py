@@ -14,9 +14,20 @@ def correct_mislabeled_examples(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
 
     idx_38 = df.query("kid == 38 and vis != 0").index
+
+    if len(idx_38) == 0:
+        print("Warning: No keypoint with kid == 38 and vis != 0 found. Skipping correction.")
+        return df
+
     image_path_38, x_38, y_38, vis_38 = df.loc[
         idx_38, ["image_path", "x", "y", "vis"]
     ].values.flatten()
+
+
+    # idx_38 = df.query("kid == 38 and vis != 0").index
+    # image_path_38, x_38, y_38, vis_38 = df.loc[
+    #     idx_38, ["image_path", "x", "y", "vis"]
+    # ].values.flatten()
     idx_39 = df.query(f'kid == 39 and image_path == "{image_path_38}"').index
 
     df.loc[idx_39, "x"] = x_38
@@ -65,8 +76,18 @@ def normalize_coordinates(
     """
 
     df = df.copy()
+    # Handle NaN values - Option 1: Drop rows with NaN in 'x' or 'y'
+    df = df.dropna(subset=["x", "y"])
+    if df.empty:
+        raise ValueError("All keypoints have NaN coordinates after preprocessing. Check earlier steps.")
+
+
     df["x"] = df["x"] / img_width
     df["y"] = df["y"] / img_height
+
+    print("x range:", df["x"].min(), "-", df["x"].max())
+    print("y range:", df["y"].min(), "-", df["y"].max())
+
 
     assert (
         0.0 <= df[["x", "y"]].min().min() and df[["x", "y"]].max().max() < 1.0
