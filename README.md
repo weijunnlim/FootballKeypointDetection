@@ -1,7 +1,4 @@
-# Pitch Geometry
-
-[![Python 3.8](https://img.shields.io/badge/python-3.8.10-blue.svg)](https://www.python.org/downloads/release/python-3810/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+# Keypoint Detection
 
 For a given image showing a fragment of a football pitch, output the position of visible keypoints. 
 The keypoints are labeled according to the map below:
@@ -11,7 +8,7 @@ The keypoints are labeled according to the map below:
 
 An exemplary image and its annotated keypoints are shown here:
 <p align="center">
-  <img src="./docs/sample_keypoints.png" width="514" />
+  <img src="./image_output_test/000160.jpg" width="514" />
 </p>
 
 ## Installation
