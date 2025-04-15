@@ -8,7 +8,7 @@ The keypoints are labeled according to the map below:
 
 An exemplary image and its annotated keypoints are shown here:
 <p align="center">
-  <img src="./image_output_test/000160.jpg" width="514" />
+  <img src="./images_output_test/000160.jpg" width="514" />
 </p>
 
 ## Installation
