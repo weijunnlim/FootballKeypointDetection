@@ -19,6 +19,7 @@ Here is an example of a test image with its predicted keypoints visualized:
 ## 🚀 How to Run the Model
 
 Step 1: Run Inference
+
 Navigate to the inference directory:
 ```bash
 cd pitch_geo/inference
@@ -32,6 +33,7 @@ PYTHONPATH=. python pitch_geo/inference/inference.py
 This will generate a CSV file (outputs/output_keypoints.csv) containing all predicted keypoints for the input images.
 
 Step 2: Visualize Keypoints
+
 Run the following script to draw keypoints on the images:
 ```bash
 PYTHONPATH=. python pitch_geo/show_keypoints.py outputs/output_keypoints.csv /home/weijunl/Football-Object-Detection/datasets/dataset/test/images ./images_output_test
